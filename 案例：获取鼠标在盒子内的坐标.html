@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>案例：获取鼠标在盒子内的坐标</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .box {
+        width: 200px;
+        height: 350px;
+        margin: 100px auto;
+        border: 1px solid violet;
+        background: tomato;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. 在盒子内移动 mousemove，先设置事件
+     2. 首先得到鼠标在页面中的坐标（e.pageX , e.pageY)
+     3. 其次得到盒子在页面中的距离（box.offsetLeft , box.offsetTop)
+     4. 用鼠标距离页面中的坐标减去盒子在页面中的距离 得到鼠标在盒子内的坐标 -->
+    <div class="box">盒子</div>
+    <script>
+      var box = document.querySelector(".box");
+      box.addEventListener("mousemove", function (e) {
+        var x = e.pageX - this.offsetLeft;
+        var y = e.pageY - this.offsetTop;
+        console.log("水平距离为" + x + " 垂直距离为" + y);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //第一种，较为常用
+      //(function () {})()
+      (function () {
+        console.log(2); //不需要调用，立马打印2  第二个函数可以看作是调用函数
+      })();
+      (function (a, b) {
+        console.log(a + b); //也可以传递参数进来
+      })(1, 2);
+      //第二种，w3c的建议
+      //(function () {}())
+      (function (a, b) {
+        console.log(a + b);
+      })(1, 2);
+    </script>
+  </body>
+</html>

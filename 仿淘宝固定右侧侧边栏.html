@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>仿淘宝固定右侧侧边栏</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      div {
+        width: 1200px;
+        margin: 10px auto;
+      }
+
+      .header {
+        margin-top: 10px;
+        height: 100px;
+        background-color: hsl(278, 84%, 69%);
+      }
+
+      .banner {
+        height: 500px;
+        background-color: hsl(278, 90%, 58%);
+      }
+
+      .main {
+        height: 1000px;
+        background-color: hsl(278, 80%, 40%);
+      }
+
+      .slider-bar {
+        position: absolute;
+        top: 300px;
+        right: 120px;
+        height: 200px;
+        width: 40px;
+        background-color: #d80bc7;
+      }
+
+      span {
+        display: none;
+        text-decoration-line: none;
+        color: #000;
+        font-weight: bold;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header"></div>
+    <div class="banner"></div>
+    <div class="main"></div>
+    <div class="slider-bar"><span class="goBack">返回顶部</span></div>
+    <script>
+      var banner = document.querySelector(".banner");
+      var main = document.querySelector(".main");
+      var sliderbar = document.querySelector(".slider-bar");
+      var goBack = document.querySelector(".goBack");
+      var bannerTop = banner.offsetTop;
+      var mainTop = main.offsetTop;
+      var sliderbarTop = sliderbar.offsetTop - bannerTop;
+      document.addEventListener("scroll", function () {
+        // 1、页面被卷去的头部大于等于banner的offsetTop时 让left变为固定定位 改变left的top值【如果不修改left的边偏移 变成固定定位后 还是会以原来的边偏移进行偏移】
+        if (window.pageYOffset >= banner.offsetTop) {
+          sliderbar.style.position = "fixed";
+          sliderbar.style.top = sliderbarTop + "px";
+        } else {
+          sliderbar.style.position = "absolute";
+          sliderbar.style.top = "300px";
+        }
+        // 2、页面被卷去的头部大于等于footer的offsetTop时 显示a标签
+        if (window.pageYOffset >= mainTop) {
+          goBack.style.display = "block";
+        } else {
+          goBack.style.display = "none";
+        }
+      });
+
+      goBack.addEventListener("click", function (e) {
+        // 需要先禁止goBack的默认行为，点击goBack才能实现页面滚动
+        e.preventDefault();
+        //因为是窗口滚动，所以对象是 window
+        animate(window, 0);
+      });
+
+      // 带有动画的返回顶部
+      //动画函数
+      function animate(object, target, callback) {
+        clearInterval(object.timer);
+        object.timer = setInterval(function () {
+          var step = (target - window.pageYOffset) / 10;
+          step = step > 10 ? Math.ceil(step) : Math.floor(step);
+          window.scroll(0, window.pageYOffset + step);
+          if (window.pageYOffset == target) {
+            clearInterval(object.timer);
+            callback && callback();
+          }
+          //把每次加1 这个步长值改为一个慢慢变小的值  步长公式：（目标值-现在的位置）/ 10
+          //obj.style.left = obj.offsetLeft + step + "px";
+          //window.scroll(x,y)  x y 不写单位 直接写数字即可
+          window.scroll(0, window.pageYOffset + step);
+        }, 15);
+      }
+    </script>
+  </body>
+</html>

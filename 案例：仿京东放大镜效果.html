@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body,
+      div {
+        margin: 0;
+        padding: 0;
+      }
+      .product {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        margin: 50px 0 0 20px;
+        border: 1px solid #000;
+      }
+      .preview_img img {
+        width: 300px;
+        height: 300px;
+        margin: 50px 50px;
+      }
+      .mask {
+        position: absolute;
+        display: none;
+        top: 20px;
+        left: 30px;
+        width: 80px;
+        height: 80px;
+        background-color: yellow;
+        opacity: 0.5;
+        cursor: move;
+      }
+      .big {
+        position: absolute;
+        display: none;
+        left: 410px;
+        top: 0;
+        width: 500px;
+        height: 500px;
+        z-index: 999;
+        overflow: hidden;
+      }
+      .big img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 400px;
+        height: 400px;
+      }
+    </style>
+    <!-- 引入js文件 -->
+    <script src="detail.js"></script>
+  </head>
+  <body>
+    <div class="product">
+      <div class="preview_img">
+        <img src="images/xs.jpg" alt="" />
+        <div class="mask"></div>
+        <div class="big">
+          <img src="images/xs.jpg" alt="" class="bigImg" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
